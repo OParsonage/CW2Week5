@@ -64,3 +64,5 @@ for term in dataPostClean:
 #    print(str(Count) + " " + str(term))
     print(term)
     Count += 1
+
+# Nominal change
