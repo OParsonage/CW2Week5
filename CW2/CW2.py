@@ -97,25 +97,32 @@ def check_solution(grid, n_rows, n_cols):
 
 	return True
 
+def check_zero(grid, n_rows, n_cols):
+	n = n_rows*n_cols
+	for i in range(n_rows):
+		for j in range(n_cols):
+			if grid[i][j] == 0:
+				for k in range(1, n+1):
+					grid[i][j] = k
+				return True
+	return False
 
 def recursive_solve(grid, n_rows, n_cols):
 
 	#N is the maximum integer considered in this board
-	n = n_rows*n_cols
+
 	# find a zero in the grid
-	for i in range(n):
-		for j in range(n):
-			if grid[i][j] == 0:
-				# try each number in turn
-				for k in range(1, n+1):
-					grid[i][j] = k
-					# if it is valid, recurse
-					if check_solution(grid, n_rows, n_cols):
-						if recursive_solve(grid, n_rows, n_cols):
-							return True
-				# if we get here, we have tried all numbers and none worked
-				grid[i][j] = 0
-				return False
+	while check_zero(grid, n_rows, n_cols) == True:
+		check_zero(grid, n_rows, n_cols) # checking for more zeros
+	# if it is valid, recurse											
+	else:
+		if check_solution(grid, n_rows, n_cols):
+			if recursive_solve(grid, n_rows, n_cols):
+				return True
+
+ 
+
+				
 
 
 # def random_solve(grid, n_rows, n_cols, max_tries=500):
