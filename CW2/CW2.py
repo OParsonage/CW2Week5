@@ -118,12 +118,12 @@ def recursive_solve(grid, n_rows, n_cols):
 				return False
 
 
-def random_solve(grid, n_rows, n_cols, max_tries=500):
+# def random_solve(grid, n_rows, n_cols, max_tries=500):
 
-	for i in range(max_tries):
-		pass
+# 	for i in range(max_tries):
+# 		pass
 
-	return grid
+# 	return grid
 
 
 def solve(grid, n_rows, n_cols):
@@ -133,8 +133,8 @@ def solve(grid, n_rows, n_cols):
 	Comment out one of the lines below to either use the random or recursive solver
 	'''
 	
-	return random_solve(grid, n_rows, n_cols)
-	#return recursive_solve(grid, n_rows, n_cols)
+	# return random_solve(grid, n_rows, n_cols)
+	return recursive_solve(grid, n_rows, n_cols)
 
 
 '''
