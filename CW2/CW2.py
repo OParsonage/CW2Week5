@@ -102,25 +102,20 @@ def recursive_solve(grid, n_rows, n_cols):
 
 	#N is the maximum integer considered in this board
 	n = n_rows*n_cols
-	# find an empty grid space
-    for i in range(n):
-        for j in range(n):
-            if grid[i][j] == 0:
-                # try each number from 1 to n
-                for k in range(1, n+1):
-                    # check if the number is valid
-                    if check_section(grid[i], n) and check_section([row[j] for row in grid], n) and check_section(get_squares(grid, n_rows, n_cols)[i], n):
-                        # if it is, set the grid space to the number
-                        grid[i][j] = k
-                        # recursively call the function
-                        if recursive_solve(grid, n_rows, n_cols):
-                            return grid
-                        # if the recursive call returns false, reset the grid space to 0
-                        grid[i][j] = 0
-                # if none of the numbers from 1 to n are valid, return false
-                return False
-
-	return grid
+	# find a zero in the grid
+	for i in range(n):
+		for j in range(n):
+			if grid[i][j] == 0:
+				# try each number in turn
+				for k in range(1, n+1):
+					grid[i][j] = k
+					# if it is valid, recurse
+					if check_solution(grid, n_rows, n_cols):
+						if recursive_solve(grid, n_rows, n_cols):
+							return True
+				# if we get here, we have tried all numbers and none worked
+				grid[i][j] = 0
+				return False
 
 
 def random_solve(grid, n_rows, n_cols, max_tries=500):
