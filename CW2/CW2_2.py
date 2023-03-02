@@ -54,6 +54,7 @@ def check_section(section, n):
 
 
 def get_squares(grid, n_rows, n_cols):
+
 	squares = []
 	for i in range(n_cols):
 		rows = (i*n_rows, (i+1)*n_rows)
@@ -64,10 +65,12 @@ def get_squares(grid, n_rows, n_cols):
 				line = grid[k][cols[0]:cols[1]]
 				square +=line
 			squares.append(square)
+
+
 	return(squares)
 
 
-def check_solution(grid :list, n_rows, n_cols):
+def check_solution(grid, n_rows, n_cols):
 	'''
 	This function is used to check whether a sudoku board has been correctly solved
 
@@ -94,40 +97,21 @@ def check_solution(grid :list, n_rows, n_cols):
 
 	return True
 
-def check_zero(grid, n_rows, n_cols):
-	n = n_rows*n_cols
-	for i in range(n_rows):
-		for j in range(n_cols):
-			if grid[i][j] == 0:
-				for k in range(1, n+1):
-					grid[i][j] = k
-				return True
-	return False
 
 def recursive_solve(grid, n_rows, n_cols):
 
 	#N is the maximum integer considered in this board
+	n = n_rows*n_cols
 
-	# find a zero in the grid
-	while check_zero(grid, n_rows, n_cols) == True:
-		check_zero(grid, n_rows, n_cols) # checking for more zeros
-	# if it is valid, recurse											
-	else:
-		if check_solution(grid, n_rows, n_cols):
-			if recursive_solve(grid, n_rows, n_cols):
-				return True
-
- 
-
-				
+	return grid
 
 
-# def random_solve(grid, n_rows, n_cols, max_tries=500):
+def random_solve(grid, n_rows, n_cols, max_tries=500):
 
-# 	for i in range(max_tries):
-# 		pass
+	for i in range(max_tries):
+		pass
 
-# 	return grid
+	return grid
 
 
 def solve(grid, n_rows, n_cols):
@@ -137,8 +121,8 @@ def solve(grid, n_rows, n_cols):
 	Comment out one of the lines below to either use the random or recursive solver
 	'''
 	
-	# return random_solve(grid, n_rows, n_cols)
-	return recursive_solve(grid, n_rows, n_cols)
+	return random_solve(grid, n_rows, n_cols)
+	#return recursive_solve(grid, n_rows, n_cols)
 
 
 '''
