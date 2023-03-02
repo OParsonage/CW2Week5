@@ -40,7 +40,7 @@ grid6 = [
 		[0, 0, 1, 0, 0, 0],
 		[0, 5, 0, 0, 6, 4]]
 
-grids = [(grid1, 2, 2), (grid2, 2, 2), (grid3, 2, 2), (grid4, 2, 2), (grid5, 2, 2)]
+grids = [(grid1, 2, 2), (grid2, 2, 2), (grid3, 2, 2), (grid4, 2, 2), (grid5, 2, 2), (grid6, 2, 3)]
 '''
 ===================================
 DO NOT CHANGE CODE ABOVE THIS LINE
@@ -68,7 +68,6 @@ def get_squares(grid, n_rows, n_cols):
 
 
 	return(squares)
-
 
 def check_solution(grid, n_rows, n_cols):
 	'''
@@ -99,20 +98,18 @@ def check_solution(grid, n_rows, n_cols):
 
 
 def recursive_solve(grid, n_rows, n_cols):
-
 	#N is the maximum integer considered in this board
 	n = n_rows*n_cols
-
-	return grid
-
-
-def random_solve(grid, n_rows, n_cols, max_tries=500):
-
-	for i in range(max_tries):
-		pass
-
-	return grid
-
+	for i in range(0, n):
+		for j in range(0, n):
+			if grid[i][j] == 0:
+				for k in range(1, n+1):
+					grid[i][j] = k
+					recursive_solve(grid, n_rows, n_cols)
+					if check_solution(grid, n_rows, n_cols):
+						return(grid)
+				grid[i][j] = 0
+				return(grid)
 
 def solve(grid, n_rows, n_cols):
 
@@ -121,8 +118,8 @@ def solve(grid, n_rows, n_cols):
 	Comment out one of the lines below to either use the random or recursive solver
 	'''
 	
-	return random_solve(grid, n_rows, n_cols)
-	#return recursive_solve(grid, n_rows, n_cols)
+	#return random_solve(grid, n_rows, n_cols)
+	return recursive_solve(grid, n_rows, n_cols)
 
 
 '''
