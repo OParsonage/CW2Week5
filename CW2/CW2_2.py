@@ -106,14 +106,6 @@ def recursive_solve(grid, n_rows, n_cols):
 	return grid
 
 
-def random_solve(grid, n_rows, n_cols, max_tries=500):
-
-	for i in range(max_tries):
-		pass
-
-	return grid
-
-
 def solve(grid, n_rows, n_cols):
 
 	'''
