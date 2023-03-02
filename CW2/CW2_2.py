@@ -41,6 +41,7 @@ grid6 = [
 		[0, 5, 0, 0, 6, 4]]
 
 grids = [(grid1, 2, 2), (grid2, 2, 2), (grid3, 2, 2), (grid4, 2, 2), (grid5, 2, 2), (grid6, 2, 3)]
+#grids = [(grid1, 2, 2)]
 '''
 ===================================
 DO NOT CHANGE CODE ABOVE THIS LINE
@@ -104,12 +105,26 @@ def recursive_solve(grid, n_rows, n_cols):
 		for j in range(0, n): # j is the column
 			if grid[i][j] == 0: # if the cell is empty
 				for k in range(1, n+1): # k is the number we are trying to put in the cell
-					grid[i][j] = k # we put k in the cell
-					recursive_solve(grid, n_rows, n_cols) # we call the function recursively
-					if check_solution(grid, n_rows, n_cols): # if the grid is correct, we return it
-						return(grid)
+					if valid(grid, i, j, k, n_rows, n_cols):
+						grid[i][j] = k # we put k in the cell
+						recursive_solve(grid, n_rows, n_cols) # we call the function recursively
+						if check_solution(grid, n_rows, n_cols): # if the grid is correct, we return it
+							return(grid)
 				grid[i][j] = 0 # if we have tried all the numbers and none of them work, we return the grid to its original state
 				return(grid)
+
+def valid(grid, row_index, column_index, number, n_rows, n_cols):
+	if number in grid[row_index]:
+		return False
+	column = [grid[n][column_index] for n in range(0,len(grid))]
+	if number in column:
+		return False
+	boxes = get_squares(grid,n_rows,n_cols)
+	box = boxes[n_rows*(row_index//n_rows)+column_index//n_cols]
+	if number in box:
+		return False
+	return True
+
 
 def solve(grid, n_rows, n_cols):
 
