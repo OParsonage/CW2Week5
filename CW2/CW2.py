@@ -94,14 +94,14 @@ def check_solution(grid :list, n_rows, n_cols):
 
 	return True
 
-def check_zero(grid, n_rows, n_cols):
-	n = n_rows*n_cols
-	for i in range(n_rows):
+def check_zero(grid, n_rows, n_cols): # checking for zeros
+	n = n_rows*n_cols # max integer considered in this board
+	for i in range(n_rows): 
 		for j in range(n_cols):
-			if grid[i][j] == 0:
-				for k in range(1, n+1):
-					grid[i][j] = k
-				return True
+			if grid[i][j] == 0: # if there is a zero
+				for k in range(1, n+1): # checking for valid integers
+					grid[i][j] = k # replacing zero with integer
+				return True # returning true to continue checking for zeros
 	return False
 
 def recursive_solve(grid, n_rows, n_cols):
@@ -116,18 +116,6 @@ def recursive_solve(grid, n_rows, n_cols):
 		if check_solution(grid, n_rows, n_cols):
 			if recursive_solve(grid, n_rows, n_cols):
 				return True
-
- 
-
-				
-
-
-# def random_solve(grid, n_rows, n_cols, max_tries=500):
-
-# 	for i in range(max_tries):
-# 		pass
-
-# 	return grid
 
 
 def solve(grid, n_rows, n_cols):
