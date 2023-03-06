@@ -97,7 +97,7 @@ def check_solution(grid, n_rows, n_cols):
 
 	return True
 
-
+# function to solve the sudoku board
 def recursive_solve(grid, n_rows, n_cols):
 	#N is the maximum integer considered in this board
 	n = n_rows*n_cols
@@ -112,18 +112,20 @@ def recursive_solve(grid, n_rows, n_cols):
 							return(grid)
 				grid[i][j] = 0 # if we have tried all the numbers and none of them work, we return the grid to its original state
 				return(grid)
+# we return the grid if it is already solved
 
+# we check if the number is valid in the row, column and box
 def valid(grid, row_index, column_index, number, n_rows, n_cols):
-	if number in grid[row_index]:
+	if number in grid[row_index]: # if the number is already in the row, it is not valid
 		return False
-	column = [grid[n][column_index] for n in range(0,len(grid))]
-	if number in column:
+	column = [grid[n][column_index] for n in range(0,len(grid))] # we create a list of the numbers in the column
+	if number in column: # if the number is already in the column, it is not valid
 		return False
-	boxes = get_squares(grid,n_rows,n_cols)
-	box = boxes[n_rows*(row_index//n_rows)+column_index//n_cols]
-	if number in box:
+	boxes = get_squares(grid,n_rows,n_cols) # we create a list of the numbers in the box
+	box = boxes[n_rows*(row_index//n_rows)+column_index//n_cols] # we find the box in which the cell is
+	if number in box: # if the number is already in the box, it is not valid
 		return False
-	return True
+	return True # if the number is not in the row, column or box, it is valid
 
 
 def solve(grid, n_rows, n_cols):
