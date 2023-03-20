@@ -60,6 +60,8 @@ def reader(data_file): # function to read the data from the csv file
         all_data = csv.reader(data) # read the data
         return list(all_data)   # return the data as a list
 
+
+
 def get_squares(grid, n_rows, n_cols):
 
 	squares = []
