@@ -47,11 +47,19 @@ grids = [(grid1, 2, 2), (grid2, 2, 2), (grid3, 2, 2), (grid4, 2, 2), (grid5, 2, 
 DO NOT CHANGE CODE ABOVE THIS LINE
 ===================================
 '''
+import csv
+
 def check_section(section, n):
 
 	if len(set(section)) == len(section) and sum(section) == sum([i for i in range(n+1)]):
 		return True
 	return False
+
+def reader(data_file): # function to read the data from the csv file
+    with open(data_file) as data:
+        all_data = csv.reader(data) # read the data
+        return list(all_data)   # return the data as a list
+
 
 
 def get_squares(grid, n_rows, n_cols):
