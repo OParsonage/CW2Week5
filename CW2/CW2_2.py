@@ -99,13 +99,18 @@ def check_solution(grid, n_rows, n_cols):
 
 # function to solve the sudoku board
 def recursive_solve(grid, n_rows, n_cols):
+	'''A recursive function to both enter and test possible values in the grid
+	Inputs:
+		grid: initial grid to solve
+		n_rows: number of boxes horizontally
+		n_cols: number of boxes vertically'''
 	#N is the maximum integer considered in this board
 	n = n_rows*n_cols
 	for row in range(0, n): # i is the row
 		for column in range(0, n): # j is the column
 			if grid[row][column] == 0: # if the cell is empty
 				for k in range(1, n+1): # k is the number we are trying to put in the cell
-					if valid(grid, row, column, k, n_rows, n_cols):
+					if valid(grid, row, column, k, n_rows, n_cols): # test that the value entered could be part of a valid solution
 						grid[row][column] = k # we put k in the cell
 						recursive_solve(grid, n_rows, n_cols) # we call the function recursively
 						if check_solution(grid, n_rows, n_cols): # if the grid is correct, we return it
@@ -116,6 +121,15 @@ def recursive_solve(grid, n_rows, n_cols):
 
 # we check if the number is valid in the row, column and box
 def valid(grid, row_index, column_index, number, n_rows, n_cols):
+	'''Tests if the number to be input is a valid input to the existing grid, i.e. does not clash with another value in the row, column, or box
+	Inputs: 
+		grid: current grid to be tested against
+		row_index, column_index: location of value in grid
+		number: value of number to be tested
+		n_rows: number of boxes horizontally
+		n_columns: number of boxes vertically
+	Outputs: 
+		Boolean True/False'''
 	if number in grid[row_index]: # if the number is already in the row, it is not valid
 		return False
 	column = [grid[n][column_index] for n in range(0,len(grid))] # we create a list of the numbers in the column
