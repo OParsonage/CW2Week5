@@ -101,16 +101,16 @@ def check_solution(grid, n_rows, n_cols):
 def recursive_solve(grid, n_rows, n_cols):
 	#N is the maximum integer considered in this board
 	n = n_rows*n_cols
-	for i in range(0, n): # i is the row
-		for j in range(0, n): # j is the column
-			if grid[i][j] == 0: # if the cell is empty
+	for row in range(0, n): # i is the row
+		for column in range(0, n): # j is the column
+			if grid[row][column] == 0: # if the cell is empty
 				for k in range(1, n+1): # k is the number we are trying to put in the cell
-					if valid(grid, i, j, k, n_rows, n_cols):
-						grid[i][j] = k # we put k in the cell
+					if valid(grid, row, column, k, n_rows, n_cols):
+						grid[row][column] = k # we put k in the cell
 						recursive_solve(grid, n_rows, n_cols) # we call the function recursively
 						if check_solution(grid, n_rows, n_cols): # if the grid is correct, we return it
 							return(grid)
-				grid[i][j] = 0 # if we have tried all the numbers and none of them work, we return the grid to its original state
+				grid[row][column] = 0 # if we have tried all the numbers and none of them work, we return the grid to its original state
 				return(grid)
 # we return the grid if it is already solved
 
